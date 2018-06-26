@@ -25,10 +25,10 @@ namespace AulePiu.CorsoOvernet.WpfApp
             InitializeComponent();
         }
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
-        {
-            var vm = this.Resources["viewmodel"] as LoginViewModel;
-            vm.CheckAuth();
-        }
+        //private void btnLogin_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var vm = this.Resources["viewmodel"] as LoginViewModel;
+        //    vm.CheckAuth();
+        //}
     }
 }

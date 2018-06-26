@@ -1,14 +1,15 @@
-﻿using System;
+﻿using AulePiu.CorsoOvernet.Authentication;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using System;
 using System.ComponentModel;
 using System.Threading;
 
 namespace AulePiu.CorsoOvernet.ViewModels
 {
-    public class LoginViewModel : INotifyPropertyChanged
+    public class LoginViewModel : ViewModelBase
     {
         private Timer timer;
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         // PascalCase
         // public string Username { get; set; }
@@ -16,39 +17,75 @@ namespace AulePiu.CorsoOvernet.ViewModels
         public string Username
         {
             get { return username; }
-            set { username = value; }
+            set { username = value;
+                base.RaisePropertyChanged();
+                this.LoginCommand.RaiseCanExecuteChanged();
+
+                // Scatena PropertyChanged solo quando
+                // il valore cambia
+                // base.Set(nameof(Username), ref username, value);
+            }
         }
 
         public string Password { get; set; }
         public bool SaveCredentials { get; set; }
 
         // Fields (NO), mettere get & set per fare una property
-        public DateTime CurrentTime { get; set; }
+        private DateTime currentTime;
+        public DateTime CurrentTime
+        {
+            get { return currentTime; }
+            set { currentTime = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
+        private bool? ok;
+        public bool? Ok
+        {
+            get { return ok; }
+            set { ok = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
+        public RelayCommand LoginCommand { get; set; }
 
         public LoginViewModel()
         {
-            this.Username = "igor";
+            this.LoginCommand = new RelayCommand
+                (loginCommandExecute, loginCommandCanExecute);
+            int id = Thread.CurrentThread.ManagedThreadId;
+            this.Username = "bologna";
             this.Password = "pwd";
             this.CurrentTime = DateTime.Now;
 
             timer = new Timer(updateTimer, null, 0, 1000);
         }
 
-        private void updateTimer(object state)
+        private bool loginCommandCanExecute()
         {
-            this.CurrentTime = DateTime.Now;
-
-            // C'è qualcuno sottoscritto a questo evento?
-            if (this.PropertyChanged != null)
+            if (string.IsNullOrEmpty(this.Username) ||
+                string.IsNullOrEmpty(this.Password))
             {
-                this.PropertyChanged(this,
-                    new PropertyChangedEventArgs(nameof(CurrentTime)));
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
 
-        public void CheckAuth()
+        private void loginCommandExecute()
         {
+            AuthEngine eng = new AuthEngine();
+            this.Ok = eng.Check(this.Username, this.Password);
+        }
 
+        private void updateTimer(object state)
+        {
+            int id = Thread.CurrentThread.ManagedThreadId;
+            this.CurrentTime = DateTime.Now;
         }
     }
 }

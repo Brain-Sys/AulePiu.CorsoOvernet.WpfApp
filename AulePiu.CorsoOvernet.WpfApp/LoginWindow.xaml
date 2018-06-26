@@ -16,11 +16,21 @@
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center">
             <TextBlock Text="USERNAME" FontSize="32" />
-            <TextBox Text="{Binding Username}" FontSize="24" />
+            <TextBox Text="{Binding Username,UpdateSourceTrigger=PropertyChanged}" FontSize="24" />
             <TextBlock Text="PASSWORD" FontSize="32" />
-            <TextBox Text="{Binding Password}" FontSize="24" />
-            <Button x:Name="btnLogin" Click="btnLogin_Click"
-                    Content="LOGIN" FontSize="24" />
+            <TextBox Text="{Binding Password,UpdateSourceTrigger=PropertyChanged}" FontSize="24" />
+            <Button Content="LOGIN" FontSize="24"
+                    Command="{Binding LoginCommand}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Ok}" Value="False">
+                                <Setter Property="Background" Value="Red" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <CheckBox Content="Ricorda le mie credenziali"
                       IsChecked="{Binding SaveCredentials}" />
         </StackPanel>
