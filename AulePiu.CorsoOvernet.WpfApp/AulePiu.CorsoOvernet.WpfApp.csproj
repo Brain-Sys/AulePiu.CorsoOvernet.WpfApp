@@ -74,6 +74,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MainMenuWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -84,6 +88,9 @@
     </Compile>
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainMenuWindow.xaml.cs">
+      <DependentUpon>MainMenuWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -121,6 +128,10 @@
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AulePiu.CorsoOvernet.Messages\AulePiu.CorsoOvernet.Messages.csproj">
+      <Project>{c44fa05b-bbda-4221-a6d5-e794f7563ebd}</Project>
+      <Name>AulePiu.CorsoOvernet.Messages</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AulePiu.CorsoOvernet.ViewModels\AulePiu.CorsoOvernet.ViewModels.csproj">
       <Project>{ac05486d-a5be-4dd4-8cba-be41aeb620d7}</Project>
       <Name>AulePiu.CorsoOvernet.ViewModels</Name>

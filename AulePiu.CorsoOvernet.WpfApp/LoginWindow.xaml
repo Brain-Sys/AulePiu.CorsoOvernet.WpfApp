@@ -11,14 +11,31 @@
     <Window.Resources>
         <vm:LoginViewModel x:Key="viewmodel" />
     </Window.Resources>
-    
-    <Grid DataContext="{StaticResource viewmodel}">
+
+    <Window.DataContext>
+        <StaticResource ResourceKey="viewmodel" />
+    </Window.DataContext>
+
+    <Window.InputBindings>
+        <KeyBinding Key="Return" Command="{Binding LoginCommand}" />
+    </Window.InputBindings>
+
+    <Grid FocusManager.FocusedElement="{Binding ElementName=Focus}">
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center">
             <TextBlock Text="USERNAME" FontSize="32" />
-            <TextBox Text="{Binding Username,UpdateSourceTrigger=PropertyChanged}" FontSize="24" />
+            <TextBox Name="Focus" Text="{Binding Username,UpdateSourceTrigger=PropertyChanged}" FontSize="24">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding LoginCommand}" />
+                </TextBox.InputBindings>
+            </TextBox>
             <TextBlock Text="PASSWORD" FontSize="32" />
-            <TextBox Text="{Binding Password,UpdateSourceTrigger=PropertyChanged}" FontSize="24" />
+            <TextBox Text="{Binding Password,UpdateSourceTrigger=PropertyChanged}" FontSize="24">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding LoginCommand}" />
+                    <KeyBinding Key="L" Modifiers="Alt" Command="{Binding LoginCommand}" />
+                </TextBox.InputBindings>
+            </TextBox>
             <Button Content="LOGIN" FontSize="24"
                     Command="{Binding LoginCommand}">
                 <Button.Style>

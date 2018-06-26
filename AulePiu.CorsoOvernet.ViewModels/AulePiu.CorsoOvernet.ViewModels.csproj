@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AulePiu.CorsoOvernet.Authentication\AulePiu.CorsoOvernet.Authentication.csproj" />
+    <ProjectReference Include="..\AulePiu.CorsoOvernet.Messages\AulePiu.CorsoOvernet.Messages.csproj" />
   </ItemGroup>
 
 </Project>

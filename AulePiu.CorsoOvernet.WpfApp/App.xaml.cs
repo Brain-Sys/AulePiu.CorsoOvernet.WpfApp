@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AulePiu.CorsoOvernet.Messages;
+using GalaSoft.MvvmLight.Messaging;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -16,6 +18,57 @@ namespace AulePiu.CorsoOvernet.WpfApp
         public App()
         {
             this.DispatcherUnhandledException += App_DispatcherUnhandledException;
+
+            Messenger.Default.Register<OpenNewViewMessage>(this, openNewView);
+            Messenger.Default.Register<ShowMessage>(this, showMessage);
+            Messenger.Default.Register<QuestionMessage>(this, askQuestion);
+        }
+
+        private void askQuestion(QuestionMessage obj)
+        {
+            var result = MessageBox.Show(obj.Text, obj.Title,
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                obj.Yes?.Invoke();
+            }
+            else
+            {
+                obj.No?.Invoke();
+            }
+        }
+
+        private void showMessage(ShowMessage obj)
+        {
+            MessageBox.Show(obj.Text, obj.Title,
+                MessageBoxButton.OK,
+                MessageBoxImage.Exclamation);
+        }
+
+        private void openNewView(OpenNewViewMessage obj)
+        {
+            Window wnd = null;
+
+            Type type = Type.GetType(string.Format("AulePiu.CorsoOvernet.WpfApp.{0}Window, AulePiu.CorsoOvernet.WpfApp", obj.ViewName));
+
+            if (type != null)
+            {
+                wnd = Activator.CreateInstance(type) as Window;
+
+                if (wnd != null)
+                {
+                    if (obj.Modal)
+                    {
+                        wnd.ShowDialog();
+                    }
+                    else
+                    {
+                        wnd.Show();
+                    }
+                }
+            }
         }
 
         private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)

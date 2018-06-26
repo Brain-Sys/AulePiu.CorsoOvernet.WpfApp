@@ -1,6 +1,8 @@
 ﻿using AulePiu.CorsoOvernet.Authentication;
+using AulePiu.CorsoOvernet.Messages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.ComponentModel;
 using System.Threading;
@@ -17,7 +19,9 @@ namespace AulePiu.CorsoOvernet.ViewModels
         public string Username
         {
             get { return username; }
-            set { username = value;
+            set
+            {
+                username = value;
                 base.RaisePropertyChanged();
                 this.LoginCommand.RaiseCanExecuteChanged();
 
@@ -27,7 +31,18 @@ namespace AulePiu.CorsoOvernet.ViewModels
             }
         }
 
-        public string Password { get; set; }
+        private string password;
+        public string Password
+        {
+            get { return password; }
+            set
+            {
+                password = value;
+                base.RaisePropertyChanged();
+                this.LoginCommand.RaiseCanExecuteChanged();
+            }
+        }
+
         public bool SaveCredentials { get; set; }
 
         // Fields (NO), mettere get & set per fare una property
@@ -35,7 +50,9 @@ namespace AulePiu.CorsoOvernet.ViewModels
         public DateTime CurrentTime
         {
             get { return currentTime; }
-            set { currentTime = value;
+            set
+            {
+                currentTime = value;
                 base.RaisePropertyChanged();
             }
         }
@@ -44,7 +61,9 @@ namespace AulePiu.CorsoOvernet.ViewModels
         public bool? Ok
         {
             get { return ok; }
-            set { ok = value;
+            set
+            {
+                ok = value;
                 base.RaisePropertyChanged();
             }
         }
@@ -80,6 +99,25 @@ namespace AulePiu.CorsoOvernet.ViewModels
         {
             AuthEngine eng = new AuthEngine();
             this.Ok = eng.Check(this.Username, this.Password);
+
+            if (this.Ok == true)
+            {
+                var msg = new OpenNewViewMessage();
+                msg.ViewName = "MainMenu";
+                msg.Modal = true;
+                Messenger.Default.Send<OpenNewViewMessage>(msg);
+            }
+            else
+            {
+                var msg = new QuestionMessage
+                    ("Errore!", "Login fallito! Vuoi ritentare?");
+                msg.Yes = () => {
+                    this.Ok = null;
+                    this.Password = string.Empty;
+                };
+                msg.No = () => { };
+                Messenger.Default.Send<QuestionMessage>(msg);
+            }
         }
 
         private void updateTimer(object state)
