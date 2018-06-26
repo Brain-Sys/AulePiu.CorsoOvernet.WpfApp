@@ -102,14 +102,14 @@ namespace AulePiu.CorsoOvernet.ViewModels
 
             if (this.Ok == true)
             {
+                var msg = new OpenNewViewMessage();
+                msg.ViewName = "MainMenu";
+                msg.Modal = false;
+                Messenger.Default.Send<OpenNewViewMessage>(msg);
+
                 var closeMsg = new CloseViewMessage();
                 closeMsg.ViewName = "Login";
                 Messenger.Default.Send<CloseViewMessage>(closeMsg);
-
-                var msg = new OpenNewViewMessage();
-                msg.ViewName = "MainMenu";
-                msg.Modal = true;
-                Messenger.Default.Send<OpenNewViewMessage>(msg);
             }
             else
             {
