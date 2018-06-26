@@ -102,6 +102,10 @@ namespace AulePiu.CorsoOvernet.ViewModels
 
             if (this.Ok == true)
             {
+                var closeMsg = new CloseViewMessage();
+                closeMsg.ViewName = "Login";
+                Messenger.Default.Send<CloseViewMessage>(closeMsg);
+
                 var msg = new OpenNewViewMessage();
                 msg.ViewName = "MainMenu";
                 msg.Modal = true;
@@ -115,7 +119,11 @@ namespace AulePiu.CorsoOvernet.ViewModels
                     this.Ok = null;
                     this.Password = string.Empty;
                 };
-                msg.No = () => { };
+                msg.No = () => {
+                    Messenger.Default.Send<CloseApplicationMessage>(
+                        CloseApplicationMessage.Empty);
+                };
+
                 Messenger.Default.Send<QuestionMessage>(msg);
             }
         }

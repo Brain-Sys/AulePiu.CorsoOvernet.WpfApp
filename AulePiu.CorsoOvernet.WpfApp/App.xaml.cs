@@ -18,10 +18,29 @@ namespace AulePiu.CorsoOvernet.WpfApp
         public App()
         {
             this.DispatcherUnhandledException += App_DispatcherUnhandledException;
+            this.ShutdownMode = ShutdownMode.OnLastWindowClose;
 
             Messenger.Default.Register<OpenNewViewMessage>(this, openNewView);
             Messenger.Default.Register<ShowMessage>(this, showMessage);
             Messenger.Default.Register<QuestionMessage>(this, askQuestion);
+            Messenger.Default.Register<CloseApplicationMessage>(this, closeApp);
+            Messenger.Default.Register<CloseViewMessage>(this, closeView);
+        }
+
+        private void closeView(CloseViewMessage obj)
+        {
+            foreach (Window wnd in Application.Current.Windows)
+            {
+                if (wnd.GetType().Name.StartsWith(obj.ViewName))
+                {
+                    wnd.Close();
+                }
+            }
+        }
+
+        private void closeApp(CloseApplicationMessage obj)
+        {
+            Application.Current.Shutdown(obj.ExitCode);
         }
 
         private void askQuestion(QuestionMessage obj)
