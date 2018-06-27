@@ -3,10 +3,94 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:AulePiu.CorsoOvernet.ViewModels;assembly=AulePiu.CorsoOvernet.ViewModels"
         xmlns:local="clr-namespace:AulePiu.CorsoOvernet.WpfApp"
         mc:Ignorable="d"
         Title="MainMenuWindow" Height="450" Width="800">
+
+    <Window.Resources>
+        <vm:MainMenuViewModel x:Key="viewmodel" />
+
+        <DataTemplate x:Key="machineTemplate">
+            <Grid Background="LightCoral">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding Code}" FontSize="20" />
+                <Slider Value="{Binding WorkHours}"
+                                Minimum="0"
+                                Maximum="{Binding Path=MaximumWorkHours,Source={StaticResource viewmodel}}"
+                                Margin="16,0,16,0"
+                                Grid.Column="1" />
+                <StackPanel Orientation="Horizontal" Grid.Column="2">
+                    <Button Content="RESET" Padding="8,2"
+                            Command="{Binding ResetCommand,Source={StaticResource viewmodel}}"
+                            CommandParameter="{Binding}">
+                        <Button.ToolTip>
+                            <TextBlock FontSize="24" Foreground="Red"
+                                       Background="LightGreen" Padding="16"
+                                       Text="{Binding WorkHours}" />
+                        </Button.ToolTip>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    <Window.DataContext>
+        <StaticResource ResourceKey="viewmodel" />
+    </Window.DataContext>
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBox Text="{Binding MaximumWorkHours,UpdateSourceTrigger=PropertyChanged}"
+                 FontSize="24" Margin="8" HorizontalAlignment="Left" />
+            <Button Margin="8" Padding="16,2"
+                    Command="{Binding AddCommand}">
+                <Grid>
+                    <TextBlock HorizontalAlignment="Center" Text="ADD">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsBusy}" Value="True">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsBusy}" Value="False">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Text="&#xe0eb;"
+                               FontFamily="Segoe UI Symbol">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsBusy}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsBusy}" Value="False">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+            </Button>
+        </StackPanel>
+        <TextBox Text="{Binding ElementName=MachinesList,UpdateSourceTrigger=PropertyChanged,Path=SelectedItem.WorkHours}"
+                 FontSize="24" Margin="8" HorizontalAlignment="Right" />
+        <ListBox ItemsSource="{Binding Items}" Grid.Row="1"
+                 SelectedItem="{Binding Item}"
+                 HorizontalContentAlignment="Stretch" Name="MachinesList"
+                 ItemTemplate="{StaticResource machineTemplate}">
+        </ListBox>
     </Grid>
 </Window>

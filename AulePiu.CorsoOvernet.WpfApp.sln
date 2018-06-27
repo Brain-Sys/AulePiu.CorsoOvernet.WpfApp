@@ -7,9 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AulePiu.CorsoOvernet.WpfApp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AulePiu.CorsoOvernet.ViewModels", "AulePiu.CorsoOvernet.ViewModels\AulePiu.CorsoOvernet.ViewModels.csproj", "{AC05486D-A5BE-4DD4-8CBA-BE41AEB620D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AulePiu.CorsoOvernet.Authentication", "AulePiu.CorsoOvernet.Authentication\AulePiu.CorsoOvernet.Authentication.csproj", "{BAEF776A-C6E1-41AA-9860-242F78D73DB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AulePiu.CorsoOvernet.Authentication", "AulePiu.CorsoOvernet.Authentication\AulePiu.CorsoOvernet.Authentication.csproj", "{BAEF776A-C6E1-41AA-9860-242F78D73DB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AulePiu.CorsoOvernet.Messages", "AulePiu.CorsoOvernet.Messages\AulePiu.CorsoOvernet.Messages.csproj", "{C44FA05B-BBDA-4221-A6D5-E794F7563EBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AulePiu.CorsoOvernet.Messages", "AulePiu.CorsoOvernet.Messages\AulePiu.CorsoOvernet.Messages.csproj", "{C44FA05B-BBDA-4221-A6D5-E794F7563EBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AulePiu.CorsoOvernet.DomainModel", "AulePiu.CorsoOvernet.DomainModel\AulePiu.CorsoOvernet.DomainModel.csproj", "{867DB69B-6857-47E9-A85A-A232FE45B9D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{C44FA05B-BBDA-4221-A6D5-E794F7563EBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C44FA05B-BBDA-4221-A6D5-E794F7563EBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C44FA05B-BBDA-4221-A6D5-E794F7563EBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{867DB69B-6857-47E9-A85A-A232FE45B9D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{867DB69B-6857-47E9-A85A-A232FE45B9D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{867DB69B-6857-47E9-A85A-A232FE45B9D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{867DB69B-6857-47E9-A85A-A232FE45B9D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
