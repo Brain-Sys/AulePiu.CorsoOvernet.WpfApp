@@ -13,10 +13,13 @@ namespace AulePiu.CorsoOvernet.ViewModels
 {
     public class MainMenuViewModel : ViewModelBase
     {
+        private Timer t;
+
         public ObservableCollection<MachineViewModel> Items { get; set; }
 
         public RelayCommand<MachineViewModel> ResetCommand { get; set; }
         public RelayCommand AddCommand { get; set; }
+        public RelayCommand TestCommand { get; set; }
 
         private int maximumWorkHours;
         public int MaximumWorkHours
@@ -44,7 +47,9 @@ namespace AulePiu.CorsoOvernet.ViewModels
         public bool IsBusy
         {
             get { return isBusy; }
-            set { isBusy = value;
+            set
+            {
+                isBusy = value;
                 base.RaisePropertyChanged();
                 this.AddCommand.RaiseCanExecuteChanged();
             }
@@ -54,6 +59,7 @@ namespace AulePiu.CorsoOvernet.ViewModels
         {
             this.ResetCommand = new RelayCommand<MachineViewModel>(resetCommandExecute);
             this.AddCommand = new RelayCommand(addCommandExecute, addCommandCanExecute);
+            this.TestCommand = new RelayCommand(testCommandExecute);
             this.MaximumWorkHours = 10000;
             this.Items = new ObservableCollection<MachineViewModel>();
             //this.Items.Add(new Machine()
@@ -65,6 +71,19 @@ namespace AulePiu.CorsoOvernet.ViewModels
             load();
         }
 
+        private void testCommandExecute()
+        {
+            Random rnd = new Random((int)DateTime.Now.Ticks);
+
+            t = new Timer((o) =>
+            {
+                foreach (var item in this.Items)
+                {
+                    item.WorkHours = rnd.Next(0, 10000);
+                }
+            }, null, 0, 100);
+        }
+
         private bool addCommandCanExecute()
         {
             return !this.IsBusy;
@@ -74,8 +93,8 @@ namespace AulePiu.CorsoOvernet.ViewModels
         {
             this.IsBusy = true;
 
-            await Task.Run(() => {
-
+            await Task.Run(() =>
+            {
                 // Attesa "inutile"
 
                 int id = Thread.CurrentThread.ManagedThreadId;
@@ -104,6 +123,7 @@ namespace AulePiu.CorsoOvernet.ViewModels
         private void resetCommandExecute(MachineViewModel parameter)
         {
             parameter.WorkHours = 0;
+            parameter.Maintenance = true;
         }
 
         private void load()

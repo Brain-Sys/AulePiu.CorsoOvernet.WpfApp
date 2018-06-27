@@ -86,6 +86,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\MaintenanceToBitmapConverter.cs" />
+    <Compile Include="Converters\WorkHoursToBrushConverter.cs" />
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -125,7 +128,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModels\" />
+    <Resource Include="Images\icon_off.png" />
+    <Resource Include="Images\icon_on.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AulePiu.CorsoOvernet.Messages\AulePiu.CorsoOvernet.Messages.csproj">

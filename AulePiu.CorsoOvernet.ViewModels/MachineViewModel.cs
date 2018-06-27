@@ -46,6 +46,20 @@ namespace AulePiu.CorsoOvernet.ViewModels
             {
                 Instance.WorkHours = value;
                 base.RaisePropertyChanged();
+                this.Maintenance = false;
+            }
+        }
+
+        public bool Maintenance
+        {
+            get
+            {
+                return this.Instance.Maintenance;
+            }
+            set
+            {
+                this.Instance.Maintenance = value;
+                base.RaisePropertyChanged();
             }
         }
 

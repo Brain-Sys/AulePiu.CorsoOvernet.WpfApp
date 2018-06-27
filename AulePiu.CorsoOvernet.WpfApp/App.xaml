@@ -1,8 +1,14 @@
 ﻿<Application x:Class="AulePiu.CorsoOvernet.WpfApp.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:AulePiu.CorsoOvernet.WpfApp">
+             xmlns:cnv="clr-namespace:AulePiu.CorsoOvernet.WpfApp.Converters"
+             xmlns:local="clr-namespace:AulePiu.CorsoOvernet.WpfApp"
+             x:Name="AulePiu">
     <Application.Resources>
-         
+        <cnv:BoolToVisibilityConverter x:Key="blnVisCnv" />
+        <SolidColorBrush x:Key="NewMachine" Color="LightGreen" />
+        <SolidColorBrush x:Key="Low" Color="Green" />
+        <SolidColorBrush x:Key="Medium" Color="Orange" />
+        <SolidColorBrush x:Key="High" Color="DarkViolet" />
     </Application.Resources>
 </Application>
