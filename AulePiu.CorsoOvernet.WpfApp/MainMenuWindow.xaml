@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:AulePiu.CorsoOvernet.ViewModels;assembly=AulePiu.CorsoOvernet.ViewModels"
         xmlns:cnv="clr-namespace:AulePiu.CorsoOvernet.WpfApp.Converters"
+        xmlns:beh="clr-namespace:AulePiu.CorsoOvernet.WpfApp.Behaviors"
         xmlns:local="clr-namespace:AulePiu.CorsoOvernet.WpfApp"
         mc:Ignorable="d"
         Title="MainMenuWindow" Height="450" Width="800">
@@ -61,7 +62,11 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <TextBox Text="{Binding MaximumWorkHours,UpdateSourceTrigger=PropertyChanged}"
-                 FontSize="24" Margin="8" HorizontalAlignment="Left" />
+                 FontSize="24" Margin="8" HorizontalAlignment="Left"
+                     beh:Wheel.UpCommand="{Binding ChangeMaximumWorkHoursCommand}"
+                     beh:Wheel.UpCommandParameter="-250"
+                     beh:Wheel.DownCommand="{Binding ChangeMaximumWorkHoursCommand}"
+                     beh:Wheel.DownCommandParameter="250"/>
             <Button Margin="8" Padding="16,2"
                     Command="{Binding AddCommand}">
                 <Grid>
@@ -104,7 +109,8 @@
                     Click="Button_Click" />
         </StackPanel>
         <TextBox Text="{Binding ElementName=MachinesList,UpdateSourceTrigger=PropertyChanged,Path=SelectedItem.WorkHours}"
-                 FontSize="24" Margin="8" HorizontalAlignment="Right" />
+                 FontSize="24" Margin="8" HorizontalAlignment="Right"
+                  />
         <ListBox ItemsSource="{Binding Items}" Grid.Row="1"
                  SelectedItem="{Binding Item}"
                  IsSynchronizedWithCurrentItem="True"

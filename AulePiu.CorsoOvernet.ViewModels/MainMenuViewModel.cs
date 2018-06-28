@@ -24,6 +24,7 @@ namespace AulePiu.CorsoOvernet.ViewModels
         public RelayCommand AddCommand { get; set; }
         public RelayCommand TestCommand { get; set; }
         public RelayCommand RemoveCommand { get; set; }
+        public RelayCommand<object> ChangeMaximumWorkHoursCommand { get; set; }
 
         private int maximumWorkHours;
         public int MaximumWorkHours
@@ -66,6 +67,10 @@ namespace AulePiu.CorsoOvernet.ViewModels
             this.AddCommand = new RelayCommand(addCommandExecute, addCommandCanExecute);
             this.TestCommand = new RelayCommand(testCommandExecute);
             this.RemoveCommand = new RelayCommand(removeCommandExecute, removeCommandCanExecute);
+            this.ChangeMaximumWorkHoursCommand = new RelayCommand<object>((v) =>
+            {
+                this.MaximumWorkHours += Convert.ToInt32(v);
+            });
 
             this.MaximumWorkHours = 10000;
             this.Items = new ObservableCollection<MachineViewModel>();

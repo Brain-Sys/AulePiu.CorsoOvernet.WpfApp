@@ -86,6 +86,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Behaviors\Wheel.cs" />
+    <Compile Include="Behaviors\WindowStateHelper.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\MaintenanceToBitmapConverter.cs" />
     <Compile Include="Converters\WorkHoursToBrushConverter.cs" />
