@@ -147,6 +147,8 @@
     <StackPanel>
         <Button Content="CLICK" Style="{DynamicResource CustomButton}" />
         <CheckBox Style="{DynamicResource CustomCheckbox}" />
+        <Thumb />
+        <CalendarDayButton />
     </StackPanel>
 
 </Window>
