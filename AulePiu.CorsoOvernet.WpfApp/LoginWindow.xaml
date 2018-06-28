@@ -10,6 +10,10 @@
         Title="LoginWindow" Height="450" Width="800"
         Name="LoginWnd">
 
+    <Window.Background>
+        <ImageBrush ImageSource="/AulePiu.CorsoOvernet.SharedResources;component/DuomoLodi.jpg" />
+    </Window.Background>
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
