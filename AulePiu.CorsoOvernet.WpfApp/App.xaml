@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:cnv="clr-namespace:AulePiu.CorsoOvernet.WpfApp.Converters"
              xmlns:local="clr-namespace:AulePiu.CorsoOvernet.WpfApp"
+             StartupUri="TestWindow.xaml"
              x:Name="AulePiu">
     <Application.Resources>
         <cnv:BoolToVisibilityConverter x:Key="blnVisCnv" />
