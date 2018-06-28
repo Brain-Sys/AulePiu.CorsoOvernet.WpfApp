@@ -106,10 +106,6 @@ namespace AulePiu.CorsoOvernet.ViewModels
                 msg.ViewName = "MainMenu";
                 msg.Modal = false;
                 Messenger.Default.Send<OpenNewViewMessage>(msg);
-
-                //var closeMsg = new CloseViewMessage();
-                //closeMsg.ViewName = "Login";
-                //Messenger.Default.Send<CloseViewMessage>(closeMsg);
             }
             else
             {
@@ -127,6 +123,13 @@ namespace AulePiu.CorsoOvernet.ViewModels
                 Messenger.Default.Send<QuestionMessage>(msg);
             }
         }
+
+        //public void close()
+        //{
+        //    var closeMsg = new CloseViewMessage();
+        //    closeMsg.ViewName = "Login";
+        //    Messenger.Default.Send<CloseViewMessage>(closeMsg);
+        //}
 
         private void updateTimer(object state)
         {

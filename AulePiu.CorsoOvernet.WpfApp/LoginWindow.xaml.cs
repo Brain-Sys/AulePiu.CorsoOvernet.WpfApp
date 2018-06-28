@@ -1,4 +1,6 @@
-﻿using AulePiu.CorsoOvernet.ViewModels;
+﻿using AulePiu.CorsoOvernet.Messages;
+using AulePiu.CorsoOvernet.ViewModels;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +25,13 @@ namespace AulePiu.CorsoOvernet.WpfApp
         public LoginWindow()
         {
             InitializeComponent();
+        }
+
+        private void Storyboard_Completed(object sender, EventArgs e)
+        {
+            // Messenger.Default.Send<CloseViewMessage>(new CloseViewMessage());
+
+            this.Close();
         }
 
         //private void btnLogin_Click(object sender, RoutedEventArgs e)
