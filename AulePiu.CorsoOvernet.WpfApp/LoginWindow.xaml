@@ -72,6 +72,10 @@
     <Grid FocusManager.FocusedElement="{Binding ElementName=Focus}">
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center">
+
+            <ComboBox ItemsSource="{Binding Languages}"
+                      SelectedItem="{Binding SelectedLanguage}" />
+
             <TextBlock Text="USERNAME" FontSize="32" />
             <TextBox Name="Focus" Text="{Binding Username,UpdateSourceTrigger=PropertyChanged}" FontSize="24">
                 <TextBox.InputBindings>

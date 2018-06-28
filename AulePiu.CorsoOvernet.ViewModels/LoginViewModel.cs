@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
 
@@ -12,6 +13,22 @@ namespace AulePiu.CorsoOvernet.ViewModels
     public class LoginViewModel : ViewModelBase
     {
         private Timer timer;
+
+        public List<string> Languages { get; set; }
+
+        private string selectedLanguage;
+        public string SelectedLanguage
+        {
+            get { return selectedLanguage; }
+            set { selectedLanguage = value;
+                base.RaisePropertyChanged();
+
+                // Scateno l'evento di "lingua cambiata"
+                this.LanguageChanged?.Invoke(this, this.SelectedLanguage);
+            }
+        }
+
+        public event EventHandler<string> LanguageChanged;
 
         // PascalCase
         // public string Username { get; set; }
@@ -78,6 +95,8 @@ namespace AulePiu.CorsoOvernet.ViewModels
             this.Username = "bologna";
             this.Password = "pwd";
             this.CurrentTime = DateTime.Now;
+
+            this.Languages = new List<string>() { "en-US", "it-IT" };
 
             timer = new Timer(updateTimer, null, 0, 1000);
         }

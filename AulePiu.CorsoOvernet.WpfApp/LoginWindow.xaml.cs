@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPFLocalizeExtension.Engine;
 
 namespace AulePiu.CorsoOvernet.WpfApp
 {
@@ -25,6 +26,13 @@ namespace AulePiu.CorsoOvernet.WpfApp
         public LoginWindow()
         {
             InitializeComponent();
+
+            // Qui sono in WPF...
+            var vm = this.Resources["viewmodel"] as LoginViewModel;
+            vm.LanguageChanged += (s, e) => {
+                LocalizeDictionary.Instance.Culture =
+                new System.Globalization.CultureInfo(e);
+            };
         }
 
         private void Storyboard_Completed(object sender, EventArgs e)
