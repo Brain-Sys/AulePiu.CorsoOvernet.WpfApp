@@ -1,6 +1,8 @@
 ﻿using AulePiu.CorsoOvernet.DomainModel;
+using AulePiu.CorsoOvernet.Messages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,6 +15,7 @@ namespace AulePiu.CorsoOvernet.ViewModels
 {
     public class MainMenuViewModel : ViewModelBase
     {
+        private Random rnd = new Random((int)DateTime.Now.Ticks);
         private Timer t;
 
         public ObservableCollection<MachineViewModel> Items { get; set; }
@@ -20,6 +23,7 @@ namespace AulePiu.CorsoOvernet.ViewModels
         public RelayCommand<MachineViewModel> ResetCommand { get; set; }
         public RelayCommand AddCommand { get; set; }
         public RelayCommand TestCommand { get; set; }
+        public RelayCommand RemoveCommand { get; set; }
 
         private int maximumWorkHours;
         public int MaximumWorkHours
@@ -40,6 +44,7 @@ namespace AulePiu.CorsoOvernet.ViewModels
             {
                 item = value;
                 base.RaisePropertyChanged();
+                this.RemoveCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -60,6 +65,8 @@ namespace AulePiu.CorsoOvernet.ViewModels
             this.ResetCommand = new RelayCommand<MachineViewModel>(resetCommandExecute);
             this.AddCommand = new RelayCommand(addCommandExecute, addCommandCanExecute);
             this.TestCommand = new RelayCommand(testCommandExecute);
+            this.RemoveCommand = new RelayCommand(removeCommandExecute, removeCommandCanExecute);
+
             this.MaximumWorkHours = 10000;
             this.Items = new ObservableCollection<MachineViewModel>();
             //this.Items.Add(new Machine()
@@ -71,10 +78,22 @@ namespace AulePiu.CorsoOvernet.ViewModels
             load();
         }
 
+        private bool removeCommandCanExecute()
+        {
+            return this.Item != null;
+        }
+
+        private void removeCommandExecute()
+        {
+            if (this.Item != null)
+            {
+                this.Items.Remove(this.Item);
+                this.Item = this.Items[rnd.Next(0, this.Items.Count)];
+            }
+        }
+
         private void testCommandExecute()
         {
-            Random rnd = new Random((int)DateTime.Now.Ticks);
-
             t = new Timer((o) =>
             {
                 foreach (var item in this.Items)
@@ -93,6 +112,8 @@ namespace AulePiu.CorsoOvernet.ViewModels
         {
             this.IsBusy = true;
 
+            Random rnd = new Random((int)DateTime.Now.Ticks);
+
             await Task.Run(() =>
             {
                 // Attesa "inutile"
@@ -100,7 +121,6 @@ namespace AulePiu.CorsoOvernet.ViewModels
                 int id = Thread.CurrentThread.ManagedThreadId;
                 Debug.WriteLine(id);
 
-                Random rnd = new Random((int)DateTime.Now.Ticks);
                 int number = 10000000;
                 List<MachineViewModel> cache = new List<MachineViewModel>();
                 cache.AddRange(this.Items);
@@ -116,6 +136,11 @@ namespace AulePiu.CorsoOvernet.ViewModels
                 this.Items = new ObservableCollection<MachineViewModel>(cache);
                 base.RaisePropertyChanged(nameof(Items));
             });
+
+            this.Item = this.Items[rnd.Next(0, this.Items.Count)];
+
+            Messenger.Default.Send<ShowMessage>(
+                new ShowMessage("OK!", "Operazione completata!"));
 
             this.IsBusy = false;
         }

@@ -98,11 +98,16 @@
                     </TextBlock>
                 </Grid>
             </Button>
+            <Button Margin="8" Padding="16,2" Content="DELETE"
+                    Command="{Binding RemoveCommand}" />
+            <Button Content="CODE-BEHIND" Margin="8" Padding="16,2"
+                    Click="Button_Click" />
         </StackPanel>
         <TextBox Text="{Binding ElementName=MachinesList,UpdateSourceTrigger=PropertyChanged,Path=SelectedItem.WorkHours}"
                  FontSize="24" Margin="8" HorizontalAlignment="Right" />
         <ListBox ItemsSource="{Binding Items}" Grid.Row="1"
                  SelectedItem="{Binding Item}"
+                 IsSynchronizedWithCurrentItem="True"
                  HorizontalContentAlignment="Stretch" Name="MachinesList"
                  ItemTemplate="{StaticResource machineTemplate}">
         </ListBox>
