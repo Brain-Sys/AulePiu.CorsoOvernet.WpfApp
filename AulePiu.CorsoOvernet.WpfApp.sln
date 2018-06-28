@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AulePiu.CorsoOvernet.Authen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AulePiu.CorsoOvernet.Messages", "AulePiu.CorsoOvernet.Messages\AulePiu.CorsoOvernet.Messages.csproj", "{C44FA05B-BBDA-4221-A6D5-E794F7563EBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AulePiu.CorsoOvernet.DomainModel", "AulePiu.CorsoOvernet.DomainModel\AulePiu.CorsoOvernet.DomainModel.csproj", "{867DB69B-6857-47E9-A85A-A232FE45B9D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AulePiu.CorsoOvernet.DomainModel", "AulePiu.CorsoOvernet.DomainModel\AulePiu.CorsoOvernet.DomainModel.csproj", "{867DB69B-6857-47E9-A85A-A232FE45B9D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AulePiu.CorsoOvernet.SharedResources", "AulePiu.CorsoOvernet.SharedResources\AulePiu.CorsoOvernet.SharedResources.csproj", "{FC256917-7EC8-4B6C-8AEB-6B4023D559BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{867DB69B-6857-47E9-A85A-A232FE45B9D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{867DB69B-6857-47E9-A85A-A232FE45B9D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{867DB69B-6857-47E9-A85A-A232FE45B9D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC256917-7EC8-4B6C-8AEB-6B4023D559BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC256917-7EC8-4B6C-8AEB-6B4023D559BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC256917-7EC8-4B6C-8AEB-6B4023D559BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC256917-7EC8-4B6C-8AEB-6B4023D559BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

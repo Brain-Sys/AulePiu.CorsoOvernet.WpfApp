@@ -7,15 +7,58 @@
         xmlns:wsh="clr-namespace:WindowStateHelper"
         xmlns:vm="clr-namespace:AulePiu.CorsoOvernet.ViewModels;assembly=AulePiu.CorsoOvernet.ViewModels"
         mc:Ignorable="d" wsh:WindowStateHelper.Active="True"
-        Title="LoginWindow" Height="450" Width="800">
+        Title="LoginWindow" Height="450" Width="800"
+        Name="LoginWnd">
 
     <Window.Resources>
-        <vm:LoginViewModel x:Key="viewmodel" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/ButtonStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/AulePiu.CorsoOvernet.SharedResources;component/Shared.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <vm:LoginViewModel x:Key="viewmodel" />
+            <Style x:Key="Pippo" TargetType="Button"
+                   BasedOn="{StaticResource BigButton}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Ok}" Value="False">
+                        <Setter Property="Background" Value="Red" />
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                     From="0.0" To="1.0" RepeatBehavior="4x"
+                                                     Duration="00:00:00.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.EnterActions>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+        </ResourceDictionary>
     </Window.Resources>
 
     <Window.DataContext>
         <StaticResource ResourceKey="viewmodel" />
     </Window.DataContext>
+
+    <Window.Style>
+        <Style TargetType="Window">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Ok}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                 From="1.0" To="0.0"
+                                                 Duration="00:00:01" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Style>
 
     <Window.InputBindings>
         <KeyBinding Key="Return" Command="{Binding LoginCommand}" />
@@ -31,24 +74,16 @@
                 </TextBox.InputBindings>
             </TextBox>
             <TextBlock Text="PASSWORD" FontSize="32" />
-            <TextBox Text="{Binding Password,UpdateSourceTrigger=PropertyChanged}" FontSize="24">
+            <TextBox Style="{StaticResource HandTextBox}" Text="{Binding Password,UpdateSourceTrigger=PropertyChanged}" FontSize="24">
                 <TextBox.InputBindings>
                     <KeyBinding Key="Return" Command="{Binding LoginCommand}" />
                     <KeyBinding Key="L" Modifiers="Alt" Command="{Binding LoginCommand}" />
                 </TextBox.InputBindings>
             </TextBox>
             <Button Content="LOGIN" FontSize="24"
-                    Command="{Binding LoginCommand}">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Ok}" Value="False">
-                                <Setter Property="Background" Value="Red" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
+                    Style="{StaticResource Pippo}"
+                    Command="{Binding LoginCommand}" />
+
             <CheckBox Content="Ricorda le mie credenziali"
                       IsChecked="{Binding SaveCredentials}" />
         </StackPanel>

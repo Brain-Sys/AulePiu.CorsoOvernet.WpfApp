@@ -107,9 +107,9 @@ namespace AulePiu.CorsoOvernet.ViewModels
                 msg.Modal = false;
                 Messenger.Default.Send<OpenNewViewMessage>(msg);
 
-                var closeMsg = new CloseViewMessage();
-                closeMsg.ViewName = "Login";
-                Messenger.Default.Send<CloseViewMessage>(closeMsg);
+                //var closeMsg = new CloseViewMessage();
+                //closeMsg.ViewName = "Login";
+                //Messenger.Default.Send<CloseViewMessage>(closeMsg);
             }
             else
             {
