@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace AulePiu.CorsoOvernet.WpfApp.Behaviors
 {
-    public class Wheel
+    public class Wheel : DependencyObject
     {
         #region Up
         public static ICommand GetUpCommand(DependencyObject obj)
