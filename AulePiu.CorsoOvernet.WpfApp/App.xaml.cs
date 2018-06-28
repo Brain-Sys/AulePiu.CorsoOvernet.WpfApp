@@ -4,9 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using WPFLocalizeExtension.Engine;
 
 namespace AulePiu.CorsoOvernet.WpfApp
 {
@@ -17,6 +19,8 @@ namespace AulePiu.CorsoOvernet.WpfApp
     {
         public App()
         {
+            LocalizeDictionary.Instance.Culture =
+                new CultureInfo("it-IT");
             this.DispatcherUnhandledException += App_DispatcherUnhandledException;
             this.ShutdownMode = ShutdownMode.OnLastWindowClose;
 

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AulePiu.CorsoOvernet.WpfApp"
         xmlns:wsh="clr-namespace:WindowStateHelper"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
         xmlns:vm="clr-namespace:AulePiu.CorsoOvernet.ViewModels;assembly=AulePiu.CorsoOvernet.ViewModels"
         mc:Ignorable="d" wsh:WindowStateHelper.Active="True"
         Title="LoginWindow" Height="450" Width="800"
@@ -84,7 +85,8 @@
                     <KeyBinding Key="L" Modifiers="Alt" Command="{Binding LoginCommand}" />
                 </TextBox.InputBindings>
             </TextBox>
-            <Button Content="LOGIN" FontSize="24"
+            <Button Content="{lex:Loc AulePiu.CorsoOvernet.Translations:Vocabulary:LOGIN}"
+                    FontSize="24"
                     Style="{StaticResource Pippo}"
                     Command="{Binding LoginCommand}" />
 
