@@ -126,7 +126,7 @@ namespace AulePiu.CorsoOvernet.ViewModels
                 int id = Thread.CurrentThread.ManagedThreadId;
                 Debug.WriteLine(id);
 
-                int number = 10000000;
+                int number = 100000;
                 List<MachineViewModel> cache = new List<MachineViewModel>();
                 cache.AddRange(this.Items);
 
